@@ -1,0 +1,5 @@
+services:
+  readingtime.twig_extension:
+    class: Drupal\menurender\TwigExtension\MenuRenderExtension
+    tags:
+      - { name: twig.extension }

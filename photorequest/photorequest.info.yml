@@ -1,0 +1,6 @@
+name: Photo Request
+type: module
+description: 'Photo Request Form'
+package: Custom
+core: 8.x
+hidden: false

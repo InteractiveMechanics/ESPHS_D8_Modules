@@ -1,0 +1,7 @@
+photorequest.request-form:
+ path: '/photorequest/requestform'
+ defaults:
+   _title: 'photo request form'
+   _form: '\Drupal\photorequest\Form\RequestForm'
+ requirements:
+   _permission: 'access content'
