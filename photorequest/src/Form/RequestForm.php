@@ -24,7 +24,7 @@ class RequestForm extends FormBase {
 				
 				$form['top_name'] = array(
 				    '#type' => 'fieldset',
-				    '#title' => t('Please provide the following information. Your content will be available for immediate download'),
+				    '#title' => t('Please provide the following information. Your content will be available for immediate download.'),
 				  );
 				
                 $form['name'] = array(
