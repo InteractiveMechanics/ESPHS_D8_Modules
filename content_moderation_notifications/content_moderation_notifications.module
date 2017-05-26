@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\content_moderation\Plugin\WorkflowType\ContentModeration;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\node\Entity\NodeType;
 
 /**
