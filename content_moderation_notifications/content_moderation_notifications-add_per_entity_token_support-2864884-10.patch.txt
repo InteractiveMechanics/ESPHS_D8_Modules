@@ -1,0 +1,14 @@
+diff --git a/src/Notification.php b/src/Notification.php
+index cc27384..7e8aa28 100644
+--- a/src/Notification.php
++++ b/src/Notification.php
+@@ -42,7 +42,8 @@ class Notification implements NotificationInterface {
+       // Add the entity as context to aid in token replacement.
+       $data['params']['context'] = array(
+         'entity' => $entity,
+-        'user' => \Drupal::currentUser()
++        'user' => \Drupal::currentUser(),
++        $entity->getEntityTypeId() => $entity,
+       );
+ 
+       // Figure out who the email should be going to.

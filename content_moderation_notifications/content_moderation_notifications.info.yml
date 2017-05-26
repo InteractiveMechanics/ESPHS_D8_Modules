@@ -1,7 +1,8 @@
 name: 'Content Moderation Notifications'
 type: module
 description: 'Allows emails to be sent on state transitions'
-package: Example modules
+package: Content Moderation
+configure: entity.content_moderation_notification.list
 # core: 8.x
 dependencies:
   - content_moderation

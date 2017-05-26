@@ -1,0 +1,12 @@
+--- src/Notification.php
++++ src/Notification.php
+@@ -42,7 +42,8 @@
+       // Add the entity as context to aid in token replacement.
+       $data['params']['context'] = array(
+         'entity' => $entity,
+-        'user' => \Drupal::currentUser()
++        'user' => \Drupal::currentUser(),
++        $entity->getEntityTypeId() => $entity,
+       );
+ 
+       // Figure out who the email should be going to.
