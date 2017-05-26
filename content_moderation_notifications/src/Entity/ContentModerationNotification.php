@@ -53,6 +53,18 @@ use Drupal\Core\Config\Entity\ConfigEntityBase;
  *   links = {
  *     "edit-form" = "/examples/content_moderation_notifications/manage/{content_moderation_notification}",
  *     "delete-form" = "/examples/content_moderation_notifications/manage/{content_moderation_notification}/delete"
+ *   },
+ *   config_export = {
+ *     "id",
+ *     "workflow",
+ *     "recipients",
+ *     "transitions",
+ *     "roles",
+ *     "author",
+ *     "emails",
+ *     "subject",
+ *     "body",
+ *     "label",
  *   }
  * )
  */
