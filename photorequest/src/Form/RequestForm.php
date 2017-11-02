@@ -248,6 +248,7 @@ class RequestForm extends FormBase {
 	
 			$mail->send();
 			
+			
 			$ajax_response->addCommand(new InvokeCommand('#request-form-wrapper-id form', 
 			'css', array('display', "none")));
 			
