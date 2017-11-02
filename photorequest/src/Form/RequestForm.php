@@ -10,6 +10,14 @@ use Drupal\Core\Ajax\CssCommand;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\InvokeCommand;
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
+
 
 class RequestForm extends FormBase {
 
@@ -85,7 +93,7 @@ class RequestForm extends FormBase {
                 $form['code'] = array(
                       '#type' => 'textfield',
                       '#title' => '',
-                      '#required' => TRUE,
+                      '#required' => FALSE,
                       '#attributes' => [
 							'class' => [
 							    'form-control hidden code-text'
@@ -96,7 +104,7 @@ class RequestForm extends FormBase {
                 $form['site_name'] = array(
                       '#type' => 'textfield',
                       '#title' => '',
-                      '#required' => TRUE,
+                      '#required' => FALSE,
                       '#attributes' => [
 							'class' => [
 							    'form-control hidden site-name-text'
@@ -175,7 +183,22 @@ class RequestForm extends FormBase {
         
 
 	public function handleSubmit(array &$form, FormStateInterface $form_state) {
+		
+		$mail = new PHPMailer;
 
+		/*$mail->isSMTP();                                      // Set mailer to use SMTP
+		$mail->Host = 'remote.easternstate.org';  // Specify main and backup SMTP servers
+		$mail->SMTPAuth = false;                               // Enable SMTP authentication
+		$mail->Username = '';                 // SMTP username
+		$mail->Password = '';                            // Enable encryption, 'ssl' also accepted*/
+		
+		$mail->setFrom('no-reply@easternstate.org');
+		//$mail->addAddress('jeff.majek@gmail.com', 'My Friend');
+		
+		$mail->WordWrap = 50;                                 // Set word wrap to 50 characters
+		$mail->isHTML(true);                                  // Set email format to HTML
+		
+		
 		$ajax_response = new AjaxResponse();
 		
 		if($form_state->hasAnyErrors())
@@ -206,7 +229,7 @@ class RequestForm extends FormBase {
 			mail($to, $subject, $message, $headers);*/
 			
 			//$to = "press@easternstate.org";
-			$to = "jeff.majek@gmail.com";
+			$to = "press@easternstate.org";
 			$subject = 'Press File downloaded from ' . $form_state->getValue('site_name');
 		
 		    // Always set content-type when sending HTML email
@@ -214,7 +237,16 @@ class RequestForm extends FormBase {
 		    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 		    $headers .= 'From: no-reply@easternstate.org' . "\r\n";
 		    
-		    mail($to, $subject, $msg, $headers);
+		    //mail($to, $subject, $msg, $headers);
+		    
+		    
+			$mail->addAddress($to, $form_state->getValue('name'));
+			$mail->addAddress('jeff.majek@gmail.com', $form_state->getValue('name'));
+		    $mail->Subject = $subject;
+			$mail->Body    = $msg;
+			$mail->AltBody = $subject;
+	
+			$mail->send();
 			
 			$ajax_response->addCommand(new InvokeCommand('#request-form-wrapper-id form', 
 			'css', array('display', "none")));
